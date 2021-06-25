@@ -129,20 +129,20 @@ public class ApiUploadBiz extends BaseBiz {
                     // 获取系统配置信息
                     SysVO sys = bossSys.getSys();
 
-                    UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile, sys.getPolyvWritetoken());
-                    if (result == null) {
-                        // 上传异常，不再进行处理，定时任务会继续进行处理
-                        return;
-                    }
+//                    UploadFileResult result = PolyvUtil.uploadFile(targetFile, uploadFile, sys.getPolyvWritetoken());
+//                    if (result == null) {
+//                        // 上传异常，不再进行处理，定时任务会继续进行处理
+//                        return;
+//                    }
 
-                    courseVideo.setVideoLength(result.getDuration());
-                    courseVideo.setVideoVid(result.getVid());
+                    courseVideo.setVideoLength("2");
+                    courseVideo.setVideoVid("123");
                     courseVideo.setVideoStatus(VideoStatusEnum.SUCCES.getCode());
                     courseVideoDao.updateById(courseVideo);
 
                     // 3、异步上传到阿里云
-                    String videoOasId = AliyunUtil.uploadDoc(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
-                    courseVideo.setVideoOasId(videoOasId);
+//                    String videoOasId = AliyunUtil.uploadDoc(PlatformEnum.COURSE, targetFile, BeanUtil.copyProperties(sys, Aliyun.class));
+                    courseVideo.setVideoOasId("videoOasId");
                     courseVideoDao.updateById(courseVideo);
 
                     // 根据视频编号、课时ID查询课程视频信息
